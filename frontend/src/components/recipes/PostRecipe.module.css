@@ -109,3 +109,10 @@
 .white {
   color: white;
 }
+
+/* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
+@media screen and (max-width: 450px) {
+  .content {
+    margin-left: 0%;
+  }
+}

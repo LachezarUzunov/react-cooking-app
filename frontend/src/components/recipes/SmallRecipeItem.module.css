@@ -47,18 +47,20 @@
 .btnWarning {
   background-color: orange;
 }
-/*  
-    font-family: 'Pacifico', cursive;
 
-    font-family: 'Caveat', cursive;
+/* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
+@media screen and (max-width: 450px) {
+  .recipesList {
+    flex-direction: column;
+    margin-bottom: 4rem;
+  }
 
-    font-family: 'Lobster', cursive;
+  .mobi__title {
+    text-align: center;
+  }
 
-    font-family: 'Marck Script', cursive;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-family: 'Nunito', sans-serif;
-
-     
-*/
+  .btnDiv {
+    display: flex;
+    justify-content: center;
+  }
+}

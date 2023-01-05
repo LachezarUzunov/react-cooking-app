@@ -17,7 +17,7 @@ const SmallRecipeItem = ({ recipe }) => {
           alt="chicken-breast"
         ></img>
         <div>
-          <h2>{recipe.title}</h2>
+          <h2 className={classes.mobi__title}>{recipe.title}</h2>
           <Line />
           {/* <Link to={`/profile/${user}`}>Виж</Link> */}
           <p className={classes.recipeExerpt}>{recipeExcerpt}</p>

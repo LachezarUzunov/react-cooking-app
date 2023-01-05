@@ -107,16 +107,10 @@
 .upload:hover {
   background-color: var(--light-purple);
 }
-/*  
-          font-family: 'Caveat', cursive;
-      
-          font-family: 'Lobster', cursive;
-      
-          font-family: 'Marck Script', cursive;
-      
-          font-family: 'Montserrat', sans-serif;
-      
-          font-family: 'Nunito', sans-serif;
-      
-          font-family: 'Pacifico', cursive; 
-      */
+
+/* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
+@media screen and (max-width: 450px) {
+  .content {
+    margin-left: 0%;
+  }
+}

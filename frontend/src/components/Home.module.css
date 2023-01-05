@@ -48,6 +48,14 @@
   padding-top: 24px;
   font-family: "Montserrat", sans-serif;
 }
+
+/* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
+@media screen and (max-width: 450px) {
+  .recipeMain {
+    max-width: 400px;
+  }
+}
+
 /*  
         font-family: 'Caveat', cursive;
     
