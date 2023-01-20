@@ -108,9 +108,31 @@
   background-color: var(--light-purple);
 }
 
+.singlePhoto {
+  margin-top: 40px;
+  max-width: 300px;
+  max-height: 300px;
+  border: 10px double rgba(92, 92, 92, 0.5);
+  border-radius: 20px;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
+}
+
+/* ============= MEDIA QUERIES (MEDIUM DEVICES) ============== */
+@media screen and (max-width: 900px) {
+  .content {
+    margin-left: 0%;
+    margin: 0 auto;
+  }
+}
+
 /* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
 @media screen and (max-width: 450px) {
   .content {
     margin-left: 0%;
+  }
+
+  .info {
+    padding: 0 1rem;
   }
 }

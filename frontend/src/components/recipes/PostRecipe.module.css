@@ -110,6 +110,14 @@
   color: white;
 }
 
+/* ============= MEDIA QUERIES (MEDIUM DEVICES) ============== */
+@media screen and (max-width: 900px) {
+  .content {
+    margin-left: 0%;
+    margin: 0 auto;
+  }
+}
+
 /* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
 @media screen and (max-width: 450px) {
   .content {

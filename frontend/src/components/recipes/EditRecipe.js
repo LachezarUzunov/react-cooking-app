@@ -134,6 +134,7 @@ const EditRecipe = () => {
     dispatch(reset());
   }, [message, isError, isSuccess, navigate, dispatch]);
 
+  console.log(recipe);
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -187,7 +188,7 @@ const EditRecipe = () => {
           <section className={classes.content}>
             <div className={classes.title}>
               <h1>Здравей, {user.name}</h1>
-              <h3>
+              <h3 className={classes.info}>
                 Намерил си начин да подобриш вкуса на своята рецепта? Добави
                 промените оттук!
               </h3>
@@ -318,6 +319,17 @@ const EditRecipe = () => {
                     </span>
                     човека.
                   </p> */}
+                </div>
+                <div>
+                  {recipe.photos !== undefined ? (
+                    <div>
+                      <img
+                        className={classes.singlePhoto}
+                        src={require(`../../../public/uploads/${recipe.photos}`)}
+                        alt="recipe"
+                      ></img>
+                    </div>
+                  ) : null}
                 </div>
                 <div className={classes.upload__button}>
                   <label className={classes.upload} htmlFor="photos">

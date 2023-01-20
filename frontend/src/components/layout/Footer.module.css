@@ -10,3 +10,10 @@
   padding-left: 40px;
   padding-top: 1.5rem;
 }
+
+/* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
+@media screen and (max-width: 450px) {
+  .footer {
+    height: 6rem;
+  }
+}

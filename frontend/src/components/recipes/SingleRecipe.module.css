@@ -87,3 +87,15 @@
   outline: none;
   font-family: "Marck Script", cursive;
 }
+
+/* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
+@media screen and (max-width: 450px) {
+  .textArea {
+    min-width: 280px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+  }
+}

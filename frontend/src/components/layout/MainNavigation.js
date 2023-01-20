@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { CgClose } from "react-icons/cg";
 
 const MainNavigation = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const [openMobile, setOpenMobile] = useState(true);
 
   const onLogout = () => {
     dispatch(logout());
@@ -20,8 +23,25 @@ const MainNavigation = (props) => {
       <div className={classes.logo}>
         <Link to="/">THE COOK MASTER</Link>
       </div>
+      {openMobile ? (
+        <button
+          className={classes.mobile__btn}
+          onClick={() => setOpenMobile(false)}
+        >
+          <GiHamburgerMenu />
+        </button>
+      ) : (
+        <button
+          className={classes.mobile__btn}
+          onClick={() => setOpenMobile(true)}
+        >
+          <CgClose />
+        </button>
+      )}
       <nav>
-        <ul className={classes.lis}>
+        <ul
+          className={`${classes.lis} ${openMobile ? classes.display : null} `}
+        >
           <li>
             <Link to="/">РЕЦЕПТИ</Link>
           </li>

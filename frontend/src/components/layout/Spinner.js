@@ -1,4 +1,4 @@
-import spinner from "../../assets/spinner.gif";
+import spinner from "../../assets/Bean_Eater200px.gif";
 import classes from "./Spinner.module.css";
 
 function Spinner() {
