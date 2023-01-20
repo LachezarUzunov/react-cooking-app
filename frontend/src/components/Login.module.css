@@ -19,11 +19,20 @@
   color: var(--pinky);
 }
 
+/* ============= MEDIA QUERIES (MEDIUM DEVICES) ============== */
+@media screen and (max-width: 900px) {
+  .reg {
+    margin: 0 auto;
+    padding-top: 10rem;
+    padding-left: 0%;
+    width: 70%;
+  }
+}
+
 /* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
 @media screen and (max-width: 450px) {
   .reg {
-    margin: 0 auto;
-    padding-left: 0%;
     width: 90%;
+    padding-top: 6rem;
   }
 }

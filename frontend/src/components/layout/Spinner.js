@@ -4,12 +4,7 @@ import classes from "./Spinner.module.css";
 function Spinner() {
   return (
     <div className={classes.center}>
-      <img
-        className={classes.center}
-        width={180}
-        src={spinner}
-        alt="Loading..."
-      />
+      <img width={180} src={spinner} alt="Loading..." />
     </div>
   );
 }
