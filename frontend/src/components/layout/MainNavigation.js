@@ -20,24 +20,29 @@ const MainNavigation = (props) => {
 
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>
-        <Link to="/">THE COOK MASTER</Link>
+      <div className={classes.mobile__section}>
+        <div className={classes.logo}>
+          <Link to="/">THE COOK MASTER</Link>
+        </div>
+        <div>
+          {openMobile ? (
+            <button
+              className={classes.mobile__btn}
+              onClick={() => setOpenMobile(false)}
+            >
+              <GiHamburgerMenu />
+            </button>
+          ) : (
+            <button
+              className={classes.mobile__btn}
+              onClick={() => setOpenMobile(true)}
+            >
+              <CgClose />
+            </button>
+          )}
+        </div>
       </div>
-      {openMobile ? (
-        <button
-          className={classes.mobile__btn}
-          onClick={() => setOpenMobile(false)}
-        >
-          <GiHamburgerMenu />
-        </button>
-      ) : (
-        <button
-          className={classes.mobile__btn}
-          onClick={() => setOpenMobile(true)}
-        >
-          <CgClose />
-        </button>
-      )}
+
       <nav>
         <ul
           className={`${classes.lis} ${openMobile ? classes.display : null} `}
