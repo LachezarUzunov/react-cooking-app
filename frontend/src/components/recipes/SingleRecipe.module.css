@@ -90,6 +90,10 @@
 
 /* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
 @media screen and (max-width: 450px) {
+  .center {
+    padding: 1rem;
+  }
+
   .textArea {
     min-width: 280px;
   }
@@ -97,5 +101,16 @@
   .buttons {
     display: flex;
     flex-direction: column;
+  }
+}
+
+/* ============= MEDIA QUERIES (SMALL DEVICES) ============== */
+@media screen and (max-width: 380px) {
+  .center {
+    padding: 1rem;
+  }
+
+  .textArea {
+    min-width: 250px;
   }
 }

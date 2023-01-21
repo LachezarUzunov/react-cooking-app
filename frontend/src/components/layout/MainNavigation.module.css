@@ -27,10 +27,15 @@
   gap: 1rem;
 }
 
-.lis li {
+li {
   list-style: none;
   text-transform: uppercase;
 }
+
+.link__to_top {
+  display: none;
+}
+
 .mobile__btn {
   display: none;
 }
@@ -84,5 +89,22 @@
 
   .display {
     display: none;
+  }
+
+  .link__to_top_li {
+    background-color: var(--deep-purple);
+  }
+
+  .link__to_top {
+    display: block;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: var(--deep-purple);
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px black;
+    cursor: pointer;
+    background-color: var(--pinky);
   }
 }

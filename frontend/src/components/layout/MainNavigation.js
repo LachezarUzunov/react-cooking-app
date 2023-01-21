@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgClose } from "react-icons/cg";
+import { BsFillArrowUpSquareFill } from "react-icons/bs";
 
 const MainNavigation = (props) => {
   const navigate = useNavigate();
@@ -13,13 +14,14 @@ const MainNavigation = (props) => {
   const [openMobile, setOpenMobile] = useState(true);
 
   const onLogout = () => {
+    setOpenMobile(true);
     dispatch(logout());
     dispatch(reset());
     navigate("/");
   };
 
   return (
-    <header className={classes.header}>
+    <header className={classes.header} id="up">
       <div className={classes.mobile__section}>
         <div className={classes.logo}>
           <Link to="/">THE COOK MASTER</Link>
@@ -48,11 +50,15 @@ const MainNavigation = (props) => {
           className={`${classes.lis} ${openMobile ? classes.display : null} `}
         >
           <li>
-            <Link to="/">РЕЦЕПТИ</Link>
+            <Link onClick={() => setOpenMobile(true)} to="/">
+              РЕЦЕПТИ
+            </Link>
           </li>
           {user && (
             <li>
-              <Link to="/dobavi">ДОБАВИ РЕЦЕПТА</Link>
+              <Link onClick={() => setOpenMobile(true)} to="/dobavi">
+                ДОБАВИ РЕЦЕПТА
+              </Link>
             </li>
           )}
           {/* <li>
@@ -60,12 +66,16 @@ const MainNavigation = (props) => {
           </li> */}
           {!user && (
             <li>
-              <Link to="/login">ВЛЕЗ</Link>
+              <Link onClick={() => setOpenMobile(true)} to="/login">
+                ВЛЕЗ
+              </Link>
             </li>
           )}
           {!user && (
             <li>
-              <Link to="/register">РЕГИСТРАЦИЯ</Link>
+              <Link onClick={() => setOpenMobile(true)} to="/register">
+                РЕГИСТРАЦИЯ
+              </Link>
             </li>
           )}
           {user && (
@@ -77,11 +87,17 @@ const MainNavigation = (props) => {
           )}
           {user && (
             <li>
-              <Link to="/profil">Профил</Link>
+              <Link onClick={() => setOpenMobile(true)} to="/profil">
+                Профил
+              </Link>
             </li>
           )}
         </ul>
       </nav>
+
+      <a href="#up" className={classes.link__to_top_li}>
+        <BsFillArrowUpSquareFill className={classes.link__to_top} />
+      </a>
     </header>
   );
 };
