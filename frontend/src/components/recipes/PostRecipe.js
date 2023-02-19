@@ -1,7 +1,7 @@
 import classes from "./PostRecipe.module.css";
 import { Fragment, useState, useEffect } from "react";
 import SingleIngredient from "./SingleIngredient";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Spinner from "../layout/Spinner";
 import { useSelector, useDispatch } from "react-redux";
