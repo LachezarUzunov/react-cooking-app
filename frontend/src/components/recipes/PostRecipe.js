@@ -5,8 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Spinner from "../layout/Spinner";
 import { useSelector, useDispatch } from "react-redux";
-import { createRecipe, reset } from "../../features/recipes/recipeSlice";
+import { reset } from "../../features/recipes/recipeSlice";
 import { FaPlusCircle } from "react-icons/fa";
+import { storage } from "../../firebase";
+import { ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
 const PostRecipe = () => {
   const [products, setProducts] = useState([]);
@@ -23,13 +26,7 @@ const PostRecipe = () => {
   const { recipe, isError, isSuccess, message } = useSelector(
     (state) => state.recipe
   );
-
-  // useEffect(() => {
-  //   if (recipeId !== undefined) {
-  //     dispatch(getSingleRecipe(recipeId));
-  //   }
-  // }, [dispatch, recipeId]);
-
+  console.log(user);
   const [formData, setFormData] = useState({
     title: "",
     products: [],
@@ -90,8 +87,6 @@ const PostRecipe = () => {
   };
 
   const handlePhotoUpload = (e) => {
-    // setUploadedPhotos((prevState) => [...prevState, e.target.files[0]]);
-    console.log(e.target.files[0]);
     setFormData((prevState) => ({
       ...prevState,
       photos: e.target.files[0],
@@ -102,16 +97,21 @@ const PostRecipe = () => {
     if (isError) {
       toast.error(message);
     }
-    // if (isSuccess) {
-    //   dispatch(reset());
-    //   navigate("/recepti");
-    // }
     dispatch(reset());
   }, [message, isError, isSuccess, navigate, dispatch]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    if (photos === null) {
+      return;
+    }
+
+    const imageRef = ref(storage, `${user.id}/${photos.name + v4()}`);
+    uploadBytes(imageRef, photos).then((res) => {
+      console.log(res);
+    });
 
     const formData = new FormData();
     formData.append("title", title);
@@ -121,17 +121,14 @@ const PostRecipe = () => {
     formData.append("photos", photos);
 
     try {
-      const response = await fetch(
-        `https://cook-master.onrender.com/api/posts`,
-        {
-          method: "POST",
-          body: formData,
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-            // "Content-Type": "multipart/form-data: boundary=XXX",
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:5000/api/posts`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          // "Content-Type": "multipart/form-data: boundary=XXX",
+        },
+      });
 
       if (response.status === 201) {
         const addedRecipe = await response.json();
@@ -242,15 +239,6 @@ const PostRecipe = () => {
                   required
                 ></textarea>
 
-                {/* <p className={classes.para}>Добави категории</p>
-                <article className={classes.categories}>
-                  <ul className={classes.checkboxItems}>
-                    <li className={classes.checkbox}>
-                      <input type="checkbox" name="item" required />
-                    </li>
-                  </ul>
-                </article> */}
-
                 <div className={classes.suitable}>
                   <p className={classes.white}>Подходяща за</p>
                   <select
@@ -268,25 +256,6 @@ const PostRecipe = () => {
                   </select>
 
                   <p className={classes.white}>човека.</p>
-
-                  {/* <p className={classes.white}>
-                    Подходяща за
-                    <span className={`${classes.white} ${classes.spanText}`}>
-                      <select
-                        name="suitableFor"
-                        id="suitable"
-                        onChange={onMutate}
-                        value={suitableFor}
-                        required
-                      >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="4">4</option>
-                        <option value="6">6</option>
-                      </select>
-                    </span>
-                    човека.
-                  </p> */}
                 </div>
                 <div className={classes.upload__button}>
                   <label className={classes.upload} htmlFor="photos">

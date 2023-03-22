@@ -11,11 +11,11 @@ const SmallRecipeItem = ({ recipe }) => {
   return (
     <React.Fragment>
       <div className={classes.recipesList}>
-        <img
+        {/* <img
           className={classes.smallPic}
           src={`https://cook-master-backend.onrender.com/uploads/${recipe.photos}`}
           alt={recipe.title}
-        ></img>
+        ></img> */}
         <div>
           <h2 className={classes.mobi__title}>{recipe.title}</h2>
           <Line />
