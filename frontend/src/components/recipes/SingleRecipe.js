@@ -115,7 +115,7 @@ const SingleRecipe = () => {
         <div className={classes.card}>
           <h2 className={classes.title}>{recipe.title}</h2>
           <div className={classes.line}></div>
-          {recipe.photos !== undefined ? (
+          {/* {recipe.photos !== undefined ? (
             <div>
               <img
                 className={classes.singlePhoto}
@@ -123,7 +123,7 @@ const SingleRecipe = () => {
                 alt="recipe"
               ></img>
             </div>
-          ) : null}
+          ) : null} */}
           <div>
             <h3 className={classes.product}>Необходими продукти</h3>
 

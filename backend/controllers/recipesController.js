@@ -44,7 +44,8 @@ const getRecipeById = asyncHandler(async (req, res) => {
 // @access      for registered and logged in Users only
 const postRecipe = asyncHandler(async (req, res) => {
   const { title, preparation, suitableFor } = req.body;
-  const photos = req.file.filename;
+  console.log(req.file);
+  const photos = req.file.path;
   const products = JSON.parse(req.body.products);
   // Validation
   // if (!title || !products || !preparation || !suitableFor) {

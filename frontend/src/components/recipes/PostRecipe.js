@@ -91,6 +91,7 @@ const PostRecipe = () => {
 
   const handlePhotoUpload = (e) => {
     // setUploadedPhotos((prevState) => [...prevState, e.target.files[0]]);
+    console.log(e.target.files[0]);
     setFormData((prevState) => ({
       ...prevState,
       photos: e.target.files[0],
