@@ -15,23 +15,11 @@ const {
 const { protect } = require("../middleware/authMiddleware");
 const multer = require("multer");
 const path = require("path");
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "./frontend/public/uploads");
-//   },
-//   filename: (req, file, cb) => {
-//     console.log(file);
-
-//     cb(null, file.originalname);
-//     // UNUQIE FILENAME
-//     //cb(null, Date.now() + path.extname(file.originalname));
-//   },
-// });
+const connectDB = require("../config/db");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "http://cookmaster.uzzunov.com/uploads/");
+    cb(null, "./frontend/public/uploads");
   },
   filename: (req, file, cb) => {
     console.log(file);
@@ -41,6 +29,7 @@ const storage = multer.diskStorage({
     //cb(null, Date.now() + path.extname(file.originalname));
   },
 });
+
 const upload = multer({ storage: storage });
 
 // POST, EDIT and DELETE recipes

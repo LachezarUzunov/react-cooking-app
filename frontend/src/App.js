@@ -1,4 +1,4 @@
-//import classes from "./App.module.css";
+import classes from "./App.module.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,7 +21,7 @@ import React from "react";
 
 function App() {
   return (
-    <React.Fragment>
+    <main className={classes.main}>
       <MainNavigation />
       <Routes>
         <Route path="/" element={<Home />}></Route>
@@ -44,7 +44,7 @@ function App() {
 
       <Footer />
       <ToastContainer />
-    </React.Fragment>
+    </main>
   );
 }
 
