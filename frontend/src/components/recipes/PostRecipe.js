@@ -108,7 +108,10 @@ const PostRecipe = () => {
       return;
     }
 
-    const imageRef = ref(storage, `${user.id}/${photos.name + v4()}`);
+    const imageRef = ref(
+      storage,
+      `${user.id}/${title.split(" ").join("")}/${photos.name + v4()}`
+    );
     uploadBytes(imageRef, photos).then((res) => {
       console.log(res);
     });
