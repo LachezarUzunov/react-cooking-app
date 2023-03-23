@@ -23,9 +23,7 @@ const PostRecipe = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { recipe, isError, isSuccess, message } = useSelector(
-    (state) => state.recipe
-  );
+  const { isError, isSuccess, message } = useSelector((state) => state.recipe);
   console.log(user);
   const [formData, setFormData] = useState({
     title: "",

@@ -24,8 +24,6 @@ const SmallRecipeItem = ({ recipe }) => {
   }, []);
 
   const recipeExcerpt = recipe.preparation.substring(0, 150) + "...";
-  // const user = recipe.user;
-  console.log(recipe);
 
   return (
     <React.Fragment>

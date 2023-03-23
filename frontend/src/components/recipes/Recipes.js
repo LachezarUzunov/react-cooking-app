@@ -3,8 +3,8 @@ import classes from "./Recipes.module.css";
 import Spinner from "../layout/Spinner";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { getAllRecipes, reset } from "../../features/recipes/recipeSlice";
 
@@ -43,10 +43,7 @@ const Recipes = () => {
     <main className={classes.background}>
       {recipes.map((recipe) => (
         <div className={classes.recipeBlock}>
-          <SmallRecipeItem
-            key={recipe._id}
-            recipe={recipe}
-          ></SmallRecipeItem>
+          <SmallRecipeItem key={recipe._id} recipe={recipe}></SmallRecipeItem>
         </div>
       ))}
     </main>

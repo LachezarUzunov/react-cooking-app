@@ -1,6 +1,5 @@
 import classes from "./SingleRecipe.module.css";
 import Spinner from "../layout/Spinner";
-//import Button from "../layout/Button";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -17,7 +16,9 @@ import {
 } from "../../features/recipes/commentSlice";
 import SingleIngredient from "./SingleIngredient";
 import Comments from "./Comments";
-//import Line from "../layout/Line";
+
+import { storage } from "../../firebase";
+import { listAll, ref, getDownloadURL } from "firebase/storage";
 
 const SingleRecipe = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ const SingleRecipe = () => {
   const [ingredients, setIngredient] = useState([]);
   const [activeUser, setActiveUser] = useState(false);
   const [newComment, setNewComment] = useState("");
+  const [image, setImage] = useState();
+  const [imageListRef, setImageListRef] = useState();
   const editMode = false;
 
   const { user } = useSelector((state) => state.auth);
@@ -34,13 +37,29 @@ const SingleRecipe = () => {
   );
   const { comments, isCommentLoading } = useSelector((state) => state.comment);
   const { products } = recipe;
+  const title = recipe.title ? recipe.title : "";
+  console.log(title);
+
+  useEffect(() => {
+    setImageListRef(
+      ref(storage, `${recipe.user}/${title.split(" ").join("")}/`)
+    );
+  }, [title, recipe.user]);
+
+  useEffect(() => {
+    listAll(imageListRef).then((res) => {
+      res.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImage(url);
+        });
+      });
+    });
+  }, [imageListRef]);
 
   useEffect(() => {
     dispatch(getAllComments(id));
     // eslint-disable-next-line
   }, [isCommentLoading]);
-
-  console.log(comments);
 
   useEffect(() => {
     if (user) {
@@ -115,15 +134,15 @@ const SingleRecipe = () => {
         <div className={classes.card}>
           <h2 className={classes.title}>{recipe.title}</h2>
           <div className={classes.line}></div>
-          {/* {recipe.photos !== undefined ? (
+          {recipe.photos !== undefined ? (
             <div>
               <img
                 className={classes.singlePhoto}
-                src={require(`../../../public/uploads/${recipe.photos}`)}
+                src={image}
                 alt="recipe"
               ></img>
             </div>
-          ) : null} */}
+          ) : null}
           <div>
             <h3 className={classes.product}>Необходими продукти</h3>
 
