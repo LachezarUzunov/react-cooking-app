@@ -122,14 +122,17 @@ const PostRecipe = () => {
     formData.append("photos", photos);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/posts`, {
-        method: "POST",
-        body: formData,
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-          // "Content-Type": "multipart/form-data: boundary=XXX",
-        },
-      });
+      const response = await fetch(
+        `https://cook-master.onrender.com/api/posts`,
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            // "Content-Type": "multipart/form-data: boundary=XXX",
+          },
+        }
+      );
 
       if (response.status === 201) {
         const addedRecipe = await response.json();

@@ -9,6 +9,9 @@ import { toast } from "react-toastify";
 import Spinner from "../layout/Spinner";
 import SingleIngredient from "./SingleIngredient";
 
+import { storage } from "../../firebase";
+import { listAll, ref, getDownloadURL } from "firebase/storage";
+
 const EditRecipe = () => {
   const params = useParams();
   const { recipeId } = params;
@@ -17,6 +20,8 @@ const EditRecipe = () => {
   const [volume, setVolume] = useState("");
   const [type, setType] = useState("грама");
   const [loading, setLoading] = useState(false);
+  const [imageListRef, setImageListRef] = useState();
+  const [image, setImage] = useState();
   const [formData, setFormData] = useState({
     title: "",
     products: [],
@@ -30,16 +35,34 @@ const EditRecipe = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { user } = useSelector((state) => state.auth);
+  const { recipe, isError, isSuccess, message } = useSelector(
+    (state) => state.recipe
+  );
+
+  const currentTitle = recipe.title ? recipe.title : "";
+
+  useEffect(() => {
+    setImageListRef(
+      ref(storage, `${recipe.user}/${currentTitle.split(" ").join("")}/`)
+    );
+  }, [currentTitle, recipe.user]);
+
+  useEffect(() => {
+    listAll(imageListRef).then((res) => {
+      res.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImage(url);
+        });
+      });
+    });
+  }, [imageListRef]);
+
   useEffect(() => {
     if (recipeId !== undefined) {
       dispatch(getSingleRecipe(recipeId));
     }
   }, [dispatch, recipeId]);
-
-  const { user } = useSelector((state) => state.auth);
-  const { recipe, isError, isSuccess, message } = useSelector(
-    (state) => state.recipe
-  );
 
   useEffect(() => {
     setFormData((prevState) => ({
@@ -231,7 +254,6 @@ const EditRecipe = () => {
                     id="product"
                     value={item}
                     onChange={onItemAdd}
-                    required
                   />
                   <input
                     type="text"
@@ -274,15 +296,6 @@ const EditRecipe = () => {
                   required
                 ></textarea>
 
-                {/* <p className={classes.para}>Добави категории</p>
-                  <article className={classes.categories}>
-                    <ul className={classes.checkboxItems}>
-                      <li className={classes.checkbox}>
-                        <input type="checkbox" name="item" required />
-                      </li>
-                    </ul>
-                  </article> */}
-
                 <div className={classes.suitable}>
                   <p className={classes.white}>Подходяща за</p>
                   <select
@@ -300,38 +313,19 @@ const EditRecipe = () => {
                   </select>
 
                   <p className={classes.white}>човека.</p>
-
-                  {/* <p className={classes.white}>
-                    Подходяща за
-                    <span className={`${classes.white} ${classes.spanText}`}>
-                      <select
-                        name="suitableFor"
-                        id="suitable"
-                        onChange={onMutate}
-                        value={suitableFor}
-                        required
-                      >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="4">4</option>
-                        <option value="6">6</option>
-                      </select>
-                    </span>
-                    човека.
-                  </p> */}
                 </div>
                 <div>
                   {recipe.photos !== undefined ? (
                     <div>
                       <img
                         className={classes.singlePhoto}
-                        src={require(`../../../public/uploads/${recipe.photos}`)}
+                        src={image}
                         alt="recipe"
                       ></img>
                     </div>
                   ) : null}
                 </div>
-                <div className={classes.upload__button}>
+                {/* <div className={classes.upload__button}>
                   <label className={classes.upload} htmlFor="photos">
                     Добави снимки
                   </label>
@@ -345,7 +339,7 @@ const EditRecipe = () => {
                     onChange={handlePhotoUpload}
                     required
                   />
-                </div>
+                </div> */}
 
                 <button className="btn__primary">РЕДАКТИРАЙ</button>
               </form>

@@ -38,7 +38,6 @@ const SingleRecipe = () => {
   const { comments, isCommentLoading } = useSelector((state) => state.comment);
   const { products } = recipe;
   const title = recipe.title ? recipe.title : "";
-  console.log(title);
 
   useEffect(() => {
     setImageListRef(
